@@ -1,6 +1,6 @@
 #include<iostream>
 
-
+int fib();
 
 namespace fibnum{
     #define x_ first
@@ -33,7 +33,7 @@ namespace fibnum{
 
 };
 
-int main() {
-    fibnum::Fib f;
-    std::cout << f.result(4);
-}
+// int main() {
+//     fibnum::Fib f;
+//     std::cout << f.result(4);
+// }

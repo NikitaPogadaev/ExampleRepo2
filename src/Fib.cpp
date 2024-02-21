@@ -1,8 +1,8 @@
 #include"../include/Fib.h"
 
 namespace fibnum{
-    matrix Fib::mult(matrix a, matrix b){
-            matrix c;
+    fibnum::Fib::matrix Fib::mult(fibnum::Fib::matrix a, fibnum::Fib::matrix b){
+            fibnum::Fib::matrix c;
             c.y_.y_ = (a.y_.y_ * b.y_.y_ + a.y_.x_ * b.x_.y_) % p;
             c.x_.y_ = (a.x_.y_ * b.y_.y_ + a.x_.x_ * b.x_.y_) % p;
             c.y_.x_ = (a.y_.y_ * b.y_.x_ + a.y_.x_ * b.x_.x_) % p;
@@ -10,15 +10,15 @@ namespace fibnum{
             return c;
         }
 
-        std::pair<long long, long long> Fib::mult(matrix a, std::pair<long long, long long> b){
+        std::pair<long long, long long> Fib::mult(fibnum::Fib::matrix a, std::pair<long long, long long> b){
             std::pair<long long, long long> c;
             c.y_ = (a.y_.y_ * b.y_ + a.y_.x_ * b.x_) % p;
             c.x_ = (a.x_.y_ * b.y_ + a.x_.x_ * b.x_) % p;
             return c;
         }
 
-        matrix Fib::copyOf(matrix a){
-            matrix b;
+        fibnum::Fib::matrix Fib::copyOf(fibnum::Fib::matrix a){
+            fibnum::Fib::matrix b;
             b.x_.x_ = a.x_.x_;
             b.x_.y_ = a.x_.y_;
             b.y_.x_ = a.y_.x_;
@@ -26,8 +26,8 @@ namespace fibnum{
             return b;
         }
 
-        matrix Fib::pow(matrix x, long long e){
-            matrix res = {{1, 0}, {0, 1}};
+        fibnum::Fib::matrix Fib::pow(fibnum::Fib::matrix x, long long e){
+            fibnum::Fib::matrix res = {{1, 0}, {0, 1}};
 
             while(e > 0){
                 if(e % 2){
@@ -49,13 +49,13 @@ namespace fibnum{
 
 
         std::pair<long long, long long> Fib::fib(int n){
-            matrix a = pow({{1, 1}, {1, 0}}, n - 1);
+            fibnum::Fib::matrix a = pow({{1, 1}, {1, 0}}, n - 1);
             return mult(a, {1, 1});
         }
 
 
         long long Fib::result(int n){
-            matrix a = pow({{1, 1}, {1, 0}}, n - 1);
+            fibnum::Fib::matrix a = pow({{1, 1}, {1, 0}}, n - 1);
             return mult(a, {1, 1}).y_;
         }
 
