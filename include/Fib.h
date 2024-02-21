@@ -1,4 +1,8 @@
+#pragma once
+
 #include<iostream>
+
+#include"Fibfunction.h"
 
 namespace fibnum{
     #define x_ first
@@ -31,7 +35,4 @@ namespace fibnum{
 
 };
 
-// int main() {
-//     fibnum::Fib f;
-//     std::cout << f.result(4);
-// }
+
