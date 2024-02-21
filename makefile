@@ -13,4 +13,6 @@ create_dir:
 clean:
 	rm -rf build
 
+build: create_dir build/main.out
+
 rebuild: clean create_dir build/main.out
