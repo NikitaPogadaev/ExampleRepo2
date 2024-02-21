@@ -7,5 +7,5 @@ int main(){
     fibnum::Fib f;
     std::cout << f.result(n) << '\n';
 
-    return fib();
+    return 0;
 }

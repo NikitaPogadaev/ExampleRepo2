@@ -1,7 +1,5 @@
 #include<iostream>
 
-int fib();
-
 namespace fibnum{
     #define x_ first
     #define y_ second
