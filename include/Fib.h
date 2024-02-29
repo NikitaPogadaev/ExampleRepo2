@@ -2,6 +2,8 @@
 
 #include<iostream>
 
+#include <boost/atomic.hpp>
+
 #include"Fibfunction.h"
 
 namespace fibnum{
@@ -31,8 +33,30 @@ namespace fibnum{
 
         long long result(int n);
 
+        boost::atomic<int> pp{0};
+
     };
 
 };
 
+
+class spinlock {
+private:
+  typedef enum {Locked, Unlocked} LockState;
+  boost::atomic<LockState> state_;
+
+public:
+  spinlock() : state_(Unlocked) {}
+
+  void lock()
+  {
+    while (state_.exchange(Locked, boost::memory_order_acquire) == Locked) {
+      /* busy-wait */
+    }
+  }
+  void unlock()
+  {
+    state_.store(Unlocked, boost::memory_order_release);
+  }
+};
 
