@@ -1,23 +1,26 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.13)
 project (Fibonacci)
 
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -std=c++20")
+set(CMAKE_CXX_FLAGS_DEBUG "-fsanitize=undefined -fsanitize=address")
+set(CMAKE_EXECUTABLE_SUFFIX ".out")
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 # find_package(Boost 1.40 COMPONENTS program_options REQUIRED)
 
 find_package(
   Boost 1.74 REQUIRED
   COMPONENTS atomic
-             container
              )
 
 include_directories(include)
 add_executable(exe main.cpp)
 
 add_subdirectory(src)
-# target_link_libraries(exe Func Class Boost::program_options)
+add_subdirectory(tests)
 target_link_libraries(exe Func Class
  Boost::headers
           Boost::atomic
-          Boost::container
+
          )
