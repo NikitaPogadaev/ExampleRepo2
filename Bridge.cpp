@@ -2,14 +2,14 @@
 
 // Абстракция
 class Shape {
-protected:
+
+public:
     class Renderer {
     public:
         virtual void render() const = 0;
     };
     Renderer *renderer;
 
-public:
     Shape(Renderer *renderer) : renderer(renderer) {}
 
     virtual void draw() const = 0;
