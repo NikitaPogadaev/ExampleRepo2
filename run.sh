@@ -1,4 +1,3 @@
 #!/bin/bash
 
-cd bin
-./exe.out
+./bin/exe.out
