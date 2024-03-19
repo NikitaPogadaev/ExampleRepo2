@@ -7,6 +7,10 @@ if [[($@ == *'--test'*)]]
 then
     cmake -DCMAKE_BUILD_TYPE=Debug ..
     cmake --build . --target Tests -j 16
+elif [[($@ == *'--mock-test'*)]]
+then
+    cmake -DCMAKE_BUILD_TYPE=Debug ..
+    cmake --build . --target MockTest -j 16
 else
     cmake ..
     cmake --build . -j 16

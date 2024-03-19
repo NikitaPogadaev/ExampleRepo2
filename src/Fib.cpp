@@ -10,8 +10,8 @@ namespace fibnum{
             return c;
         }
 
-        std::pair<long long, long long> Fib::mult(fibnum::Fib::matrix a, std::pair<long long, long long> b){
-            std::pair<long long, long long> c;
+        std::pair<int, int> Fib::mult(fibnum::Fib::matrix a, std::pair<int, int> b){
+            std::pair<int, int> c;
             c.y_ = (a.y_.y_ * b.y_ + a.y_.x_ * b.x_) % p;
             c.x_ = (a.x_.y_ * b.y_ + a.x_.x_ * b.x_) % p;
             return c;
@@ -26,7 +26,7 @@ namespace fibnum{
             return b;
         }
 
-        fibnum::Fib::matrix Fib::pow(fibnum::Fib::matrix x, long long e){
+        fibnum::Fib::matrix Fib::pow(fibnum::Fib::matrix x, int e){
             fibnum::Fib::matrix res = {{1, 0}, {0, 1}};
 
             while(e > 0){
@@ -40,24 +40,32 @@ namespace fibnum{
         }
 
 
-        std::pair<long long, long long> Fib::sum(std::pair<long long, long long> a, std::pair<long long, long long> b){
-            std::pair<long long, long long> c;
+        std::pair<int, int> Fib::sum(std::pair<int, int> a, std::pair<int, int> b){
+            std::pair<int, int> c;
             c.y_ = (a.y_ + b.y_) % p;
             c.x_ = (a.x_ + b.x_) % p;
             return c;
         }
 
 
-        std::pair<long long, long long> Fib::fib(int n){
+        std::pair<int, int> Fib::fib(int n){
             fibnum::Fib::matrix a = pow({{1, 1}, {1, 0}}, n - 1);
             return mult(a, {1, 1});
         }
 
 
-        long long Fib::result(int n){
+        int Fib::result(int n){
             fibnum::Fib::matrix a = pow({{1, 1}, {1, 0}}, n - 1);
             return mult(a, {1, 1}).y_;
         }
 
 
 };
+
+int FibComposition::FibMatrixCalc() {
+    return fib_obj->result(n);
+}
+
+int FibComposition::FibRecCalc() {
+    return fibfunction(n);
+}

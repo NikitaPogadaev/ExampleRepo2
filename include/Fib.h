@@ -9,29 +9,36 @@
 namespace fibnum{
     #define x_ first
     #define y_ second
-    class Fib {
 
-        typedef std::pair<std::pair<long long, long long>, std::pair<long long, long long>> matrix;
-        long long p = 1000000007;
+    class FibObj {
+    public:
+      virtual ~FibObj() {}
+      virtual int result(int n) = 0;
+    };
+
+    class Fib : public FibObj {
+
+        typedef std::pair<std::pair<int, int>, std::pair<int, int>> matrix;
+        int p = 1000000007;
 
 
         matrix mult(matrix a, matrix b);
 
-        std::pair<long long, long long> mult(matrix a, std::pair<long long, long long> b);
+        std::pair<int, int> mult(matrix a, std::pair<int, int> b);
 
         matrix copyOf(matrix a);
 
-        matrix pow(matrix x, long long e);
+        matrix pow(matrix x, int e);
 
 
-        std::pair<long long, long long> sum(std::pair<long long, long long> a, std::pair<long long, long long> b);
+        std::pair<int, int> sum(std::pair<int, int> a, std::pair<int, int> b);
 
     public:
 
-        std::pair<long long, long long> fib(int n);
+        std::pair<int, int> fib(int n);
 
 
-        long long result(int n);
+        int result(int n);
 
         boost::atomic<int> pp{0};
 
@@ -60,3 +67,20 @@ public:
   }
 };
 
+class FibComposition {
+public:
+    FibComposition(int n = 0, fibnum::FibObj* ptr = new fibnum::Fib()): n(n), fib_obj(ptr){}
+
+    int FibMatrixCalc();
+    int FibRecCalc();
+
+    // ~FibComposition() {
+    //     if (FibComposition != nullptr) {
+    //         delete fib_obj;
+    //     }
+    // }
+
+private:
+    int n;
+    fibnum::FibObj* fib_obj;
+};
