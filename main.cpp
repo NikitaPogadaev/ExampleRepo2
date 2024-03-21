@@ -11,7 +11,7 @@ int main(){
 
     FibComposition ff(n, &f);
 
-    std::cout << ff.FibMatrixCalc() << '\n';
+    std::cout << ff.FibNonTrivialCalc() << '\n';
     std::cout << ff.FibRecCalc() << '\n';
 
     return 0;

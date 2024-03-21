@@ -62,7 +62,7 @@ namespace fibnum{
 
 };
 
-int FibComposition::FibMatrixCalc() {
+int FibComposition::FibNonTrivialCalc() {
     return fib_obj->result(n);
 }
 

@@ -69,16 +69,10 @@ public:
 
 class FibComposition {
 public:
-    FibComposition(int n = 0, fibnum::FibObj* ptr = new fibnum::Fib()): n(n), fib_obj(ptr){}
+    FibComposition(int n = 0, fibnum::FibObj* ptr = nullptr): n(n), fib_obj(ptr){}
 
-    int FibMatrixCalc();
+    int FibNonTrivialCalc();
     int FibRecCalc();
-
-    // ~FibComposition() {
-    //     if (FibComposition != nullptr) {
-    //         delete fib_obj;
-    //     }
-    // }
 
 private:
     int n;
