@@ -7,6 +7,7 @@ public:
     class Renderer {
     public:
         virtual void render() const = 0;
+        virtual ~Renderer() = default;
     };
     Renderer *renderer;
 

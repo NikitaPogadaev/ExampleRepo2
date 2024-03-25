@@ -8,6 +8,7 @@ class Visitor;
 class Shape {
 public:
     virtual void accept(Visitor &visitor) = 0;
+    virtual ~Shape() = default;
 };
 
 // Конкретные элементы
@@ -26,6 +27,7 @@ class Visitor {
 public:
     virtual void visit(Circle &circle) = 0;
     virtual void visit(Rectangle &rectangle) = 0;
+    virtual ~Visitor() = default;
 };
 
 // Конкретный посетитель для вычисления площади

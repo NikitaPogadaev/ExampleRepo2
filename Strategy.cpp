@@ -1,22 +1,21 @@
 #include <iostream>
 #include <vector>
-#include <memory> // Для std::shared_ptr
+#include <memory> 
 
-// Интерфейс стратегии
-class SortStrategy {
-public:
-    virtual void sort(std::vector<int>& data) const = 0;
-    virtual ~SortStrategy() = default;
-};
+template<typename T>
+const auto DEFAULT_CMP = [](const T& a, const T& b) {return a < b;};
 
-// Конкретная стратегия: сортировка пузырьком
-class BubbleSort : public SortStrategy {
+template<std::equality_comparable T = int>
+class BubbleSort {
 public:
-    void sort(std::vector<int>& data) const override {
+    template<typename CMP = decltype(DEFAULT_CMP<T>)>
+    void sort(std::vector<T>& data, 
+    CMP cmp = DEFAULT_CMP<T>
+    ) const {
         int n = data.size();
         for (int i = 0; i < n - 1; ++i) {
             for (int j = 0; j < n - i - 1; ++j) {
-                if (data[j] > data[j + 1]) {
+                if (cmp(data[j + 1], data[j])) {
                     std::swap(data[j], data[j + 1]);
                 }
             }
@@ -24,27 +23,31 @@ public:
     }
 };
 
-// Конкретная стратегия: быстрая сортировка
-class QuickSort : public SortStrategy {
+template<std::equality_comparable T = int>
+class QuickSort {
 public:
-    void sort(std::vector<int>& data) const override {
-        quickSort(data, 0, data.size() - 1);
+    template<typename CMP = decltype(DEFAULT_CMP<T>)>
+    void sort(std::vector<T>& data,
+    CMP cmp = DEFAULT_CMP<T>) const {
+        quickSort(data, 0, data.size() - 1, cmp);
     }
 
 private:
-    void quickSort(std::vector<int>& data, int low, int high) const {
+    template<typename CMP>
+    void quickSort(std::vector<T>& data, int low, int high, CMP cmp) const {
         if (low < high) {
-            int pivot = partition(data, low, high);
-            quickSort(data, low, pivot - 1);
-            quickSort(data, pivot + 1, high);
+            int pivot = partition(data, low, high, cmp);
+            quickSort(data, low, pivot - 1, cmp);
+            quickSort(data, pivot + 1, high, cmp);
         }
     }
 
-    int partition(std::vector<int>& data, int low, int high) const {
-        int pivot = data[high];
+    template<typename CMP>
+    int partition(std::vector<T>& data, int low, int high, CMP cmp) const {
+        T pivot = data[high];
         int i = low - 1;
         for (int j = low; j <= high - 1; ++j) {
-            if (data[j] < pivot) {
+            if (cmp(data[j], pivot)) {
                 ++i;
                 std::swap(data[i], data[j]);
             }
@@ -54,20 +57,23 @@ private:
     }
 };
 
+
+
 // Контекст
-class Context {
+template<std::default_initializable Strat, std::equality_comparable T = int>
+requires requires(const Strat a, std::vector<T>& data) {
+  a.sort(data);
+}
+class ContextSort {
 private:
-    std::shared_ptr<SortStrategy> strategy;
+    std::shared_ptr<Strat> strategy;
 
 public:
-    Context(const std::shared_ptr<SortStrategy>& strategy) : strategy(strategy) {}
+    ContextSort() : strategy(std::make_shared<Strat>()) {}
 
-    void setStrategy(const std::shared_ptr<SortStrategy>& strategy) {
-        this->strategy = strategy;
-    }
-
-    void performSort(std::vector<int>& data) {
-        strategy->sort(data);
+    template<typename CMP = decltype(DEFAULT_CMP<T>)>
+    void performSort(std::vector<T>& data, CMP cmp = DEFAULT_CMP<T>) {
+        strategy->sort(data, cmp);
     }
 };
 
@@ -75,24 +81,22 @@ int main() {
     std::vector<int> data = {5, 2, 7, 1, 9, 3};
 
     // Использование стратегии сортировки пузырьком
-    auto bubbleSort = std::make_shared<BubbleSort>();
-    Context context(bubbleSort);
-    context.performSort(data);
+    ContextSort<BubbleSort<>> context1;
+    context1.performSort(data);
     std::cout << "Bubble Sort: ";
     for (int num : data) {
         std::cout << num << " ";
     }
-    std::cout << std::endl;
+    std::cout << '\n';
 
     // Использование стратегии быстрой сортировки
-    auto quickSort = std::make_shared<QuickSort>();
-    context.setStrategy(quickSort);
-    context.performSort(data);
+    ContextSort<QuickSort<>> context2;
+    context2.performSort(data);
     std::cout << "Quick Sort: ";
     for (int num : data) {
         std::cout << num << " ";
     }
-    std::cout << std::endl;
+    std::cout << '\n';
 
     return 0;
 }

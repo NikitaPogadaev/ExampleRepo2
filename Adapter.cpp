@@ -5,6 +5,7 @@
 class Target {
 public:
     virtual void request() const = 0;
+    virtual ~Target() = default;
 };
 
 // Класс, чей интерфейс нужно адаптировать

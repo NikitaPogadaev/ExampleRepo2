@@ -35,6 +35,7 @@ public:
     virtual void buildSauce() = 0;
     virtual void buildTopping() = 0;
     virtual std::shared_ptr<Pizza> getPizza() = 0;
+    virtual ~PizzaBuilder() = default;
 };
 
 // ConcreteBuilder - конкретная реализация строителя

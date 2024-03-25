@@ -4,11 +4,13 @@
 class AbstractProductA {
 public:
     virtual void use() const = 0;
+    virtual ~AbstractProductA() = default;
 };
 
 class AbstractProductB {
 public:
     virtual void consume() const = 0;
+    virtual ~AbstractProductИ() = default;
 };
 
 // Конкретные классы продуктов
@@ -45,6 +47,7 @@ class AbstractFactory {
 public:
     virtual AbstractProductA* createProductA() const = 0;
     virtual AbstractProductB* createProductB() const = 0;
+    virtual ~AbstractFactory() = default;
 };
 
 // Конкретные фабрики

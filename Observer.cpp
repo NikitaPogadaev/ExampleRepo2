@@ -8,6 +8,7 @@
 class Observer {
 public:
     virtual void update(const std::string& magazine, const std::span<std::string> rec_magazines) = 0;
+    virtual ~Observer() = default;
 };
 
 // Интерфейс для издателя
@@ -16,6 +17,7 @@ public:
     virtual void subscribe(Observer* observer) = 0;
     virtual void unsubscribe(Observer* observer) = 0;
     virtual void notify(const std::string& magazine, std::size_t first, std::size_t last) = 0;
+    virtual ~Subject() = default;
 };
 
 // Издательский дом
