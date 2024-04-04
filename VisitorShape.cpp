@@ -11,7 +11,7 @@ public:
     virtual ~Shape() = default;
 };
 
-// Конкретные элементы
+// Конкретные элVisitorементы
 class Circle : public Shape {
 public:
     void accept(Visitor &visitor) override;

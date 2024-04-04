@@ -4,6 +4,8 @@
 
 template<typename T>
 const auto DEFAULT_CMP = [](const T& a, const T& b) {return a < b;};
+template<typename T>
+const auto FALSE_CMP = [](const T& a, const T& b) {return a >= b;};
 
 template<std::equality_comparable T = int>
 class BubbleSort {
@@ -82,7 +84,7 @@ int main() {
 
     // Использование стратегии сортировки пузырьком
     ContextSort<BubbleSort<>> context1;
-    context1.performSort(data);
+    context1.performSort(data, FALSE_CMP<int>);
     std::cout << "Bubble Sort: ";
     for (int num : data) {
         std::cout << num << " ";

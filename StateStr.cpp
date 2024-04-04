@@ -23,7 +23,7 @@ public:
     }
 
     void dispense() override {
-        std::cout << "No drink dispensed." << std::endl;
+        std::cout << "No drink dispensed.\n" << std::endl;
     }
 };
 
