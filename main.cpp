@@ -1,9 +1,10 @@
 #include "include/Fib.h"
 #include "include/Fibfunction.h"
 
-int main(){
+int main(int argc, char* argv[]){
     long long n;
-    std::cin >> n;
+    // std::cin >> n;
+    n = (long long)(std::atoi(argv[1]));
 
     fibnum::Fib f;
     std::cout << f.result(n) << '\n';
