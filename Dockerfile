@@ -20,4 +20,4 @@ RUN bash build.sh
 
 ENTRYPOINT ["/Fib/run.sh"]
 
-CMD ["42", ";", "echo", "42"]
+CMD ["42"]
