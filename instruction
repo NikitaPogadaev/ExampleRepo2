@@ -1,0 +1,11 @@
+docker volume create mydata
+docker run -d -v mydata:/path/in/container my_image
+
+docker run -d -v ./local_fib_bd:/Fib/bd myp 12
+
+docker ps -a | grep "myp" | awk '{print $1}' | xargs -I {} docker rm -f {}
+
+docker volume create fib_bd
+docker run --name kekdock1 -v fib_bd:/Fib/bd -d myp 5
+docker run --rm -v fib_bd:/data alpine cat /data/fib_nums.txt
+
