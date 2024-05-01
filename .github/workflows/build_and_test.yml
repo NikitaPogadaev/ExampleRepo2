@@ -6,6 +6,9 @@ on:
       - master
       - CI
       - DockerStart
+    paths:
+      - 'main.cpp'
+      - 'test/**/*'
   pull_request:
     branches:
       - master
@@ -14,8 +17,22 @@ on:
 
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: ./req_ubuntu.sh
+
+    - name: Build project
+      run: ./build.sh
+
   test:
     runs-on: ubuntu-latest
+    needs: build
 
     steps:
     - name: Checkout repository
