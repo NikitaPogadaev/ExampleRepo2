@@ -2,6 +2,10 @@ name: GitHub CI example
 
 on:
   push:
+    paths:
+      - '**/*':
+        except:
+          - '**/README.md'
     branches:
       - master
       - CI
