@@ -6,10 +6,6 @@ on:
       - master
       - CI
       - DockerStart
-    paths:
-      '**/*':
-        except:
-          - '**/README.md'
   pull_request:
     branches:
       - master
