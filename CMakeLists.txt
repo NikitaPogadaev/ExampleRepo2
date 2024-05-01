@@ -22,6 +22,6 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 add_executable(exe main.cpp)
 
 add_subdirectory(src)
-# add_subdirectory(tests)
-# add_subdirectory(mock_tests)
+add_subdirectory(tests)
+add_subdirectory(mock_tests)
 target_link_libraries(exe Func Class)
