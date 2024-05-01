@@ -15,7 +15,7 @@ int main(int argc, char* argv[]){
     FibComposition ff(n, &f);
 
     fout << ff.FibNonTrivialCalc() << ' ';
-    fout << ff.FibRecCalc() << '\n';
+    fout << ff.FibRecCalc() << ' ' << '\n';
     fout.close();
 
     return 0;

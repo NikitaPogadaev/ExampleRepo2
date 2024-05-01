@@ -6,6 +6,15 @@ on:
       - master
       - CI
       - DockerStart
+  # pull_request:
+  #   branches:
+  #     - master
+  #     - CI
+  #     - DockerStart
+  paths:
+    '**/*':
+      except:
+        - '**/README.md'
 
 jobs:
   build:
@@ -21,16 +30,20 @@ jobs:
     - name: Build project
       run: ./build.sh
 
-  # test:
-  #   runs-on: ubuntu-latest
-  #   needs: build
-  #
-  #   steps:
-  #   - name: Checkout repository
-  #     uses: actions/checkout@v2
-  #
-  #   - name: Install testing dependencies
-  #     run: sudo apt-get install -y catch2 # or any other testing framework you use
-  #
-  #   - name: Run tests
-  #     run: make test
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: ./req_ubuntu.sh
+
+    - name: Run tests
+      run: |
+      ./build.sh --test
+      ./bin/Tests.out --gtest_output=xml:TestsRes.xml
+
+
