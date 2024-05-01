@@ -11,10 +11,10 @@ on:
   #     - master
   #     - CI
   #     - DockerStart
-  paths:
-    '**/*':
-      except:
-        - '**/README.md'
+  # paths:
+  #   '**/*':
+  #     except:
+  #       - '**/README.md'
 
 jobs:
   build:
