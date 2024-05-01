@@ -40,5 +40,6 @@ jobs:
 
     - name: Run tests
       run: ./build.sh --test
+      run: /bin/Tests.out --gtest_output=xml:TestsRes.xml
 
 
