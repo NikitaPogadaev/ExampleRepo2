@@ -7,14 +7,21 @@ set(CMAKE_EXECUTABLE_SUFFIX ".out")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
-# find_package(Boost 1.40 COMPONENTS program_options REQUIRED)
+include(FetchContent)
+FetchContent_Declare(
+  spdlog
+  GIT_REPOSITORY https://github.com/gabime/spdlog.git
+  GIT_TAG v1.11.0
+)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON) #fPIC
+FetchContent_MakeAvailable(spdlog)
 
 find_package(
   Boost 1.74 REQUIRED
   COMPONENTS atomic
              )
 
-include_directories(include)
+# include_directories(include)
 add_executable(exe main.cpp)
 
 add_subdirectory(src)
@@ -22,5 +29,5 @@ add_subdirectory(tests)
 target_link_libraries(exe Func Class
  Boost::headers
           Boost::atomic
-
+# spdlog::spdlog
          )
