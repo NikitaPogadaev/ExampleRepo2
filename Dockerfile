@@ -12,10 +12,13 @@ COPY main.cpp .
 COPY req_ubuntu.sh .
 COPY build.sh .
 COPY run.sh .
+COPY interactive_run.sh .
 
 RUN bash req_ubuntu.sh
 RUN bash build.sh
 
-ENTRYPOINT ["/Fib/run.sh"]
+# ENTRYPOINT ["/Fib/run.sh"]
 
-CMD ["42"]
+ENTRYPOINT ["/Fib/interactive_run.sh"]
+
+CMD ["10"]

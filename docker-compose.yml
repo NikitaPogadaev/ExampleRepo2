@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  fib_app:
+    build: .
+    volumes:
+      - fib_bd:/Fib/bd
+    stdin_open: true
+    tty: true
+    command: ["/Fib/interactive_run.sh"]
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - fib_bd:/usr/share/nginx/html/fib_data
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - fib_app
+
+volumes:
+  fib_bd:

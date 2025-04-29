@@ -3,8 +3,12 @@
 #include <fstream>
 
 int main(int argc, char* argv[]){
-    long long n;
-    // std::cin >> n;
+    if(argc < 2) {
+        std::cerr << "Usage: " << argv[0] << " <number>" << std::endl;
+        return 1;
+    }
+
+    long long n = (long long)(std::atoi(argv[1]));
     n = (long long)(std::atoi(argv[1]));
     std::ofstream fout("./bd/fib_nums.txt", std::ios_base::app);
 
