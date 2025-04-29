@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install dependencies
       run: ./req_ubuntu.sh
@@ -36,7 +36,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install dependencies
       run: ./req_ubuntu.sh
@@ -47,7 +47,7 @@ jobs:
         ./bin/Tests.out --gtest_output=xml:TestsRes.xml
 
     - name: Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: test-results
         path: ./TestsRes.xml
