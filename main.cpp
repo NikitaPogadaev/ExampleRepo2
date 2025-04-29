@@ -10,7 +10,7 @@ int main(int argc, char* argv[]){
 
     fibnum::Fib f;
     fout << f.result(n) << ' ';
-    fout << fibfunction(n) << ' ';
+    fout << fibfunction(n) << '\n';
 
     FibComposition ff(n, &f);
 
